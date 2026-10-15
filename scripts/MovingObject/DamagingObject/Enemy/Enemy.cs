@@ -1,15 +1,18 @@
 using Godot;
 using System;
 
+[GlobalClass]
 public partial class Enemy : DamagingObject
 {
 	[Export]
-	protected float Health = 30f;
+	protected float Health = 0f;
+
+	//получение урона врагом
 	public void TakeDamage(float damage)
 	{
 		Health -= damage;
 		//вывод в консоль информации об оставшемся здоровье врага
-		GD.Print($"enemy took {damage} damage. Heath: {Health}");
+		GD.Print($"enemy took {damage} damage. Health: {Health}");
 
 		if (Health <= 0)
 		{

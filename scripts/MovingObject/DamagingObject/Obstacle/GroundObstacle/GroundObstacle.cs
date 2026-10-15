@@ -2,9 +2,9 @@ using Godot;
 using System;
 
 [GlobalClass]
-public partial class Rock : Obstacle
+public partial class GroundObstacle : Obstacle
 {
-	[Export]
+    [Export]
 	private float _spawnX = 1300f;
 	[Export]
 	private float _spawnY = 511f;
@@ -14,10 +14,4 @@ public partial class Rock : Obstacle
     {
         return new Vector2(_spawnX, _spawnY);
     }
-
-    //переопределение движения влево
-    protected override void Move(float delta)
-	{
-		Position += velocity * delta;
-	}
 }

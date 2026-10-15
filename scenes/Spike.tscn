@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dxuwl1rjmg4kd"]
+
+[ext_resource type="Script" uid="uid://l52c8rvvcr71" path="res://scripts/MovingObject/DamagingObject/Obstacle/GroundObstacle/Spike.cs" id="1_ycsm2"]
+[ext_resource type="Texture2D" uid="uid://bcb4lunso5sxu" path="res://sprites/spike.png" id="2_uiy7f"]
+
+[node name="Spike" type="Area2D" unique_id=2088893767]
+collision_layer = 2
+script = ExtResource("1_ycsm2")
+_isSineMovement = true
+metadata/_custom_type_script = "uid://l52c8rvvcr71"
+
+[node name="Timer" type="Timer" parent="." unique_id=388647219]
+autostart = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=91751537]
+scale = Vector2(0.17341273, 0.204)
+texture = ExtResource("2_uiy7f")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1658073928]
+position = Vector2(0, -22)
+polygon = PackedVector2Array(0, -6, -27, 48, 28, 48)

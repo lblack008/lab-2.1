@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://bej1mqsmuqoya"]
+
+[ext_resource type="Script" uid="uid://d0x3pkltmcrdy" path="res://scripts/MovingObject/BenignObject/Platform/PlatformVertical.cs" id="1_n4ysf"]
+[ext_resource type="Texture2D" uid="uid://ddei4tfqoj5lf" path="res://sprites/Platform_sprite.png" id="2_lm1nm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mrmgl"]
+size = Vector2(56, 159.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4kxuq"]
+size = Vector2(55, 158)
+
+[node name="PlatformVertical" type="Area2D" unique_id=650979124]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_n4ysf")
+metadata/_custom_type_script = "uid://d0x3pkltmcrdy"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=413387191]
+collision_layer = 16
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=1257856872]
+rotation = -1.5707964
+scale = Vector2(0.36032847, 0.58333325)
+texture = ExtResource("2_lm1nm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1946899619]
+shape = SubResource("RectangleShape2D_mrmgl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1580685105]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_4kxuq")

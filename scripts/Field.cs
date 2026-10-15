@@ -18,7 +18,7 @@ public partial class Field : Node2D
 	}
 	
 	//спавн врагов через определённое время
-	private void _On_Spawn_Timer_Timeout()
+	private void OnSpawnTimerTimeout()
 	{
 		SpawnEnemy();
 	}
@@ -26,13 +26,23 @@ public partial class Field : Node2D
 	//спавн врагов случайным образом
 	private void SpawnEnemy()
 	{
-		int RandomIndex = _random.RandiRange(0, _objects.Count-1);
+		int randomIndex = _random.RandiRange(0, _objects.Count-1);
 
 		//сообщение в консоль, что был заспавнен враг
-		GD.Print($"Spawn enemy: {_objects[RandomIndex].ResourcePath}");
-		DamagingObject obj = (DamagingObject)_objects[RandomIndex].Instantiate();
+		GD.Print($"Spawn enemy: {_objects[randomIndex].ResourcePath}");
+		MovingObject obj = (MovingObject)_objects[randomIndex].Instantiate();
 		
 		obj.Position = obj.GetSpawnPosition();
 		AddChild(obj);
+	}
+
+	private void OnArea2DBodyEntered(Node2D body)
+    {
+        if (body is Player) 
+        {
+            GD.Print("Player died!");
+			//еслии игрок попадает в край поля - игра начинается сначала
+            GetTree().CallDeferred(SceneTree.MethodName.ReloadCurrentScene); 
+        }
 	}
 }

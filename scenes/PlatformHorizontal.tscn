@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dxmv4mn15jk0d"]
+
+[ext_resource type="Script" uid="uid://cd5025jnk4kx" path="res://scripts/MovingObject/BenignObject/Platform/PlatformHorizontal.cs" id="1_ub3qf"]
+[ext_resource type="Texture2D" uid="uid://ddei4tfqoj5lf" path="res://sprites/Platform_sprite.png" id="2_f7wru"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4kxuq"]
+size = Vector2(253, 56)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mti6b"]
+size = Vector2(254, 57)
+
+[node name="PlatformHorizontal" type="Area2D" unique_id=1506818197]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_ub3qf")
+_spawnYRange = Vector2(200, 400)
+metadata/_custom_type_script = "uid://cd5025jnk4kx"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=682235240]
+collision_layer = 16
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=1027021970]
+scale = Vector2(0.59, 0.583)
+texture = ExtResource("2_f7wru")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1062746901]
+position = Vector2(0.5, -1)
+shape = SubResource("RectangleShape2D_4kxuq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1025348875]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_mti6b")

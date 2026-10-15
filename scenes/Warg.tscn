@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://d0woxn72ld6g"]
+
+[ext_resource type="Script" uid="uid://dq2xagbd72por" path="res://scripts/MovingObject/DamagingObject/Enemy/GroundEnemy/Warg.cs" id="1_16sxv"]
+[ext_resource type="Texture2D" uid="uid://jhks8prkgowo" path="res://sprites/images.png" id="2_hw0x3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mti6b"]
+radius = 50.0
+height = 164.0
+
+[node name="Warg" type="Area2D" unique_id=1942968481]
+texture_filter = 1
+collision_layer = 2
+script = ExtResource("1_16sxv")
+_airSpeedMultiplier = 0.5
+Health = 30.0
+_velocity = Vector2(0, 0)
+metadata/_custom_type_script = "uid://dq2xagbd72por"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1784977783]
+texture_filter = 1
+rotation = 3.1415927
+scale = Vector2(0.34205353, 0.30982825)
+texture = ExtResource("2_hw0x3")
+flip_h = true
+flip_v = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1089759555]
+position = Vector2(8, 1)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_mti6b")

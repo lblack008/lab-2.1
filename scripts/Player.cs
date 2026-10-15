@@ -1,24 +1,28 @@
 using Godot;
 using System;
 
+[GlobalClass]
 public partial class Player : CharacterBody2D
 {
     [Export]
     private float _gravity = 980f;
     [Export]
-    private float _jumpVelocity {get; set; } = -800f;
+    private float _moveSpeed = 300f;
     [Export]
-    private float _reloadTime {get; set; } = 0.5f;
+    private float _jumpVelocity = -800f;
+    [Export]
+    private float _minJumpVelocity = -300f;
     [Export]
     private float _bulletSpeed = 500f;
-    [Export]
-    private float _bulletDamage = 10f;
+    public bool IsDead {get; set; } = false; 
     private Vector2 _velocity;
-    private PackedScene _bulletScene = GD.Load<PackedScene>("res://scenes/Bullet.tscn");
+    private PackedScene _bulletScene = GD.Load<PackedScene>("res://scenes/PlayerBullet.tscn");
 
     //реализация прыжков игрока
     public override void _PhysicsProcess(double delta)
     {
+        if (IsDead) return; 
+
         _velocity = Velocity;
 
         if (!IsOnFloor())
@@ -27,18 +31,21 @@ public partial class Player : CharacterBody2D
 
         }
 
+        float direction = Input.GetAxis("move_left", "move_right");
+        _velocity.X = direction * _moveSpeed;
+
         if (IsOnFloor() && Input.IsActionJustPressed("jump"))
         {
-            _velocity = Jump(_velocity);
+            _velocity.Y = _jumpVelocity;
         }
+
+        if (Input.IsActionJustReleased("jump") && _velocity.Y < _minJumpVelocity)
+        {
+            _velocity.Y = _minJumpVelocity;
+        }
+
         Velocity = _velocity;
         MoveAndSlide();
-    }
-
-    //вычисление вектора для прыжков
-    private Vector2 Jump(Vector2 velocity)
-    {
-        return new Vector2(0, _jumpVelocity);
     }
 
     //обработка ввода
@@ -63,12 +70,11 @@ public partial class Player : CharacterBody2D
         GD.Print("Shooting");
 
         //инстанцирование пули
-        Bullet bullet = (Bullet)_bulletScene.Instantiate();
+        PlayerBullet bullet = (PlayerBullet)_bulletScene.Instantiate();
         AddSibling(bullet);
 
         //задание позиции пули
         bullet.Position = Position + new Vector2(50, 0);
         bullet.Velocity = new Vector2(_bulletSpeed, 0);
-        bullet.SetDamage(_bulletDamage);
     }
 }

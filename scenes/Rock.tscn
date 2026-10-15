@@ -1,13 +1,7 @@
 [gd_scene format=3 uid="uid://w41sbetqa2jc"]
 
-[ext_resource type="Script" uid="uid://dvd3mwxalg7b1" path="res://scripts/Rock.cs" id="1_bpoff"]
-
-[sub_resource type="Gradient" id="Gradient_bpoff"]
-colors = PackedColorArray(0.13090086, 0.16025579, 0.20431525, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_bpoff"]
-gradient = SubResource("Gradient_bpoff")
-fill_from = Vector2(1, 1)
+[ext_resource type="Script" uid="uid://dvd3mwxalg7b1" path="res://scripts/MovingObject/DamagingObject/Obstacle/GroundObstacle/Rock.cs" id="1_bpoff"]
+[ext_resource type="Texture2D" uid="uid://du20301ojbrdb" path="res://sprites/rock.png" id="2_wmx41"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bpoff"]
 size = Vector2(45, 46)
@@ -18,8 +12,11 @@ script = ExtResource("1_bpoff")
 metadata/_custom_type_script = "uid://dvd3mwxalg7b1"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=554363298]
-scale = Vector2(0.71875, 0.734375)
-texture = SubResource("GradientTexture2D_bpoff")
+texture_filter = 1
+position = Vector2(3.4999998, -0.5)
+scale = Vector2(0.17669903, 0.19329897)
+texture = ExtResource("2_wmx41")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1676552063]
+scale = Vector2(1.5, 1.5)
 shape = SubResource("RectangleShape2D_bpoff")

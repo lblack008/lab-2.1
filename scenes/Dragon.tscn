@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://di5nr86uwj33p"]
+
+[ext_resource type="Script" uid="uid://cf61scc03uj1r" path="res://scripts/MovingObject/DamagingObject/Enemy/FlyingEnemy/Dragon.cs" id="1_kmjmj"]
+[ext_resource type="Texture2D" uid="uid://d8ol6nsxb0s3" path="res://sprites/Dragon.png" id="2_yknt0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hw0x3"]
+radius = 50.0
+height = 126.0
+
+[node name="Dragon" type="Area2D" unique_id=1481525943]
+collision_layer = 2
+script = ExtResource("1_kmjmj")
+Health = 10.0
+metadata/_custom_type_script = "uid://cf61scc03uj1r"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=972350551]
+texture_filter = 1
+scale = Vector2(0.17976283, 0.15964128)
+texture = ExtResource("2_yknt0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=837144112]
+position = Vector2(-1, -3)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_hw0x3")
+
+[node name="ShootTimer" type="Timer" parent="." unique_id=1133581135]
+autostart = true
+
+[connection signal="timeout" from="ShootTimer" to="." method="OnShootTimerTimeout"]

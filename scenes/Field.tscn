@@ -1,10 +1,16 @@
 [gd_scene format=3 uid="uid://dyh4kchfgu1yi"]
 
 [ext_resource type="Script" uid="uid://3arr22mvvx8w" path="res://scripts/Field.cs" id="1_j00b8"]
-[ext_resource type="PackedScene" uid="uid://ddn2kicjkeftb" path="res://scenes/Zombie.tscn" id="2_oa7lk"]
-[ext_resource type="PackedScene" uid="uid://cx412grhubhxt" path="res://scenes/Bat.tscn" id="3_q3786"]
-[ext_resource type="PackedScene" uid="uid://w41sbetqa2jc" path="res://scenes/Rock.tscn" id="4_oa7lk"]
+[ext_resource type="PackedScene" uid="uid://cx412grhubhxt" path="res://scenes/Bat.tscn" id="2_g4gdd"]
+[ext_resource type="PackedScene" uid="uid://di5nr86uwj33p" path="res://scenes/Dragon.tscn" id="2_uawk5"]
 [ext_resource type="PackedScene" uid="uid://dy640x6c4d1dv" path="res://scenes/Player.tscn" id="4_qfsbk"]
+[ext_resource type="PackedScene" uid="uid://dxmv4mn15jk0d" path="res://scenes/PlatformHorizontal.tscn" id="4_rv7dt"]
+[ext_resource type="PackedScene" uid="uid://bej1mqsmuqoya" path="res://scenes/PlatformVertical.tscn" id="5_je2up"]
+[ext_resource type="PackedScene" uid="uid://ddn2kicjkeftb" path="res://scenes/Zombie.tscn" id="7_54lmj"]
+[ext_resource type="PackedScene" uid="uid://d0woxn72ld6g" path="res://scenes/Warg.tscn" id="7_ewre8"]
+[ext_resource type="PackedScene" uid="uid://w41sbetqa2jc" path="res://scenes/Rock.tscn" id="8_2828m"]
+[ext_resource type="PackedScene" uid="uid://dxuwl1rjmg4kd" path="res://scenes/Spike.tscn" id="9_jewf5"]
+[ext_resource type="PackedScene" uid="uid://dk01y52ymlce4" path="res://scenes/Saw.tscn" id="10_rv7dt"]
 
 [sub_resource type="Gradient" id="Gradient_85ryy"]
 colors = PackedColorArray(0.39607844, 0, 1, 1, 0, 0.6745098, 1, 1)
@@ -25,7 +31,7 @@ size = Vector2(1190.5, 120)
 
 [node name="Field" type="Node2D" unique_id=482924761]
 script = ExtResource("1_j00b8")
-_objects = Array[PackedScene]([ExtResource("2_oa7lk"), ExtResource("4_oa7lk"), ExtResource("3_q3786")])
+_objects = Array[PackedScene]([ExtResource("2_g4gdd"), ExtResource("2_uawk5"), ExtResource("4_rv7dt"), ExtResource("5_je2up"), ExtResource("8_2828m"), ExtResource("10_rv7dt"), ExtResource("9_jewf5"), ExtResource("7_ewre8"), ExtResource("7_54lmj")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=126216932]
 position = Vector2(580.5, 321.5)
@@ -33,6 +39,7 @@ scale = Vector2(18.328125, 10.234375)
 texture = SubResource("GradientTexture2D_req00")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=171629815]
+z_index = 1
 collision_layer = 16
 collision_mask = 0
 
@@ -46,11 +53,17 @@ position = Vector2(569.75, 594)
 shape = SubResource("RectangleShape2D_g2els")
 
 [node name="Timer" type="Timer" parent="." unique_id=734625990]
-wait_time = 0.5
 autostart = true
 
 [node name="Player" parent="." unique_id=1525113941 instance=ExtResource("4_qfsbk")]
 position = Vector2(95, 261)
 collision_mask = 16
 
-[connection signal="timeout" from="Timer" to="." method="_On_Spawn_Timer_Timeout"]
+[node name="Area2D" type="Area2D" parent="." unique_id=547329753]
+position = Vector2(-74, 5)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" unique_id=1435537177]
+polygon = PackedVector2Array(14, -76, -1, 678, 1317, 692, 1332, -57, 19, -84, 74, -25, 1257, -12, 1244, 652, 66, 652, 66, -25)
+
+[connection signal="timeout" from="Timer" to="." method="OnSpawnTimerTimeout"]
+[connection signal="body_entered" from="Area2D" to="." method="OnArea2DBodyEntered"]

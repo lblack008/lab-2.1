@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ddn2kicjkeftb"]
 
-[ext_resource type="Script" uid="uid://b57l2dbwdfgb" path="res://scripts/Zombie.cs" id="1_blicy"]
+[ext_resource type="Script" uid="uid://b57l2dbwdfgb" path="res://scripts/MovingObject/DamagingObject/Enemy/GroundEnemy/Zombie.cs" id="1_blicy"]
 [ext_resource type="Texture2D" uid="uid://bel6ddcs2bq63" path="res://sprites/Zombie_sprite.png" id="2_t3ikf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4kxuq"]
@@ -10,6 +10,7 @@ height = 184.0
 [node name="Zombie" type="Area2D" unique_id=1924383971]
 collision_layer = 2
 script = ExtResource("1_blicy")
+Health = 30.0
 metadata/_custom_type_script = "uid://b57l2dbwdfgb"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=355237748]
@@ -20,3 +21,13 @@ flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1111539432]
 shape = SubResource("CapsuleShape2D_4kxuq")
+
+[node name="Timer" type="Timer" parent="." unique_id=1789491547]
+wait_time = 3.0
+autostart = true
+
+[node name="DashTimer" type="Timer" parent="." unique_id=304307641]
+wait_time = 0.5
+
+[connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]
+[connection signal="timeout" from="DashTimer" to="." method="OnDashTimerTimeout"]
