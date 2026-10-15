@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 [GlobalClass]
-public partial class Warg : GroundEnemy // Предполагаем, что GroundEnemy теперь наследует Area2D
+public partial class Warg : GroundEnemy
 {
     [Export] 
     private Player _player;
@@ -31,10 +31,12 @@ public partial class Warg : GroundEnemy // Предполагаем, что Grou
     {
         if (_player != null)
         {
+            //если игрок на земле - варг считывает разницу в их позициях
             if (_player.IsOnFloor())
             {
                 float currentDistance = _player.GlobalPosition.X - GlobalPosition.X;
 
+                //в зависимости от того, слева варг или справа - изменяется его направление скорости и отражается спрайт
                 if (currentDistance < 0)
                 {
                     _velocity.X = -_speed;
@@ -48,9 +50,11 @@ public partial class Warg : GroundEnemy // Предполагаем, что Grou
             }
         }
 
+        //изменяем позицию варга
         GlobalPosition = new Vector2(GlobalPosition.X + _velocity.X * delta, _spawnY);
     }
 
+    //задание позиции спавна
     public override Vector2 GetSpawnPosition()
     {
         return new Vector2(_spawnX, _spawnY);
